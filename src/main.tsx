@@ -4,15 +4,19 @@ import { ArrowRight, ChevronRight, Command, ExternalLink, Menu, Moon, Search, Su
 import { docs, featured, getDoc, icons, sections, type DocBlock, type DocPage } from './content';
 import './styles.css';
 
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
+const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+
 const routeFromLocation = () => {
-  const path = window.location.pathname.replace(/\/$/, '');
+  let path = window.location.pathname.replace(/\/$/, '');
+  if (basePath && path.startsWith(basePath)) path = path.slice(basePath.length) || '';
   if (!path || path === '') return 'home';
   if (path.startsWith('/docs/')) return path.replace('/docs/', '');
   return 'home';
 };
 
 function navigate(slug: string) {
-  const next = slug === 'home' ? '/' : `/docs/${slug}`;
+  const next = slug === 'home' ? `${basePath || ''}/` : `${basePath || ''}/docs/${slug}`;
   window.history.pushState({}, '', next);
   window.dispatchEvent(new Event('pulsar:navigate'));
   window.scrollTo({ top: 0, behavior: 'instant' });
@@ -75,7 +79,7 @@ function Header({ dark, setDark, query, setQuery, results, onMenu }: { dark: boo
     <header className="topbar">
       <button className="menu-button" onClick={onMenu} aria-label="Navigation"><Menu size={20} /></button>
       <button className="brand" onClick={() => navigate('home')}>
-        <span className="brand-mark"><img src="/assets/pulsar-logo-source.jpg" alt="Pulsar" /></span>
+        <span className="brand-mark"><img src={asset('/assets/pulsar-logo-source.jpg')} alt="Pulsar" /></span>
         <span><strong>Pulsar</strong><em>Docs</em></span>
       </button>
       <div className="search-wrap">
@@ -141,7 +145,7 @@ function Home() {
           </div>
         </div>
         <div className="signal-card">
-          <img src="/assets/pulsar-logo-source.jpg" alt="Logo Pulsar" />
+          <img src={asset('/assets/pulsar-logo-source.jpg')} alt="Logo Pulsar" />
           <div className="signal-line"><span>LSOS</span><strong>Modular logistics operating system</strong></div>
           <div className="pulse-grid">
             <b>6</b><span>modules métier</span>
