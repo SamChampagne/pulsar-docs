@@ -62,6 +62,7 @@ export default function App() {
   return (
     <div className="app-shell">
       <Header dark={dark} setDark={setDark} query={query} setQuery={setQuery} results={searchResults} onMenu={() => setMenuOpen(true)} />
+      {menuOpen && <button className="sidebar-scrim" aria-label="Fermer la navigation" onClick={() => setMenuOpen(false)} />}
       <div className="layout">
         <Sidebar activeSlug={activeDoc?.slug ?? 'home'} open={menuOpen} close={() => setMenuOpen(false)} />
         <main className="main-content">
@@ -69,7 +70,6 @@ export default function App() {
         </main>
         {activeDoc && <Toc doc={activeDoc} />}
       </div>
-      <button className="mobile-menu" onClick={() => setMenuOpen(true)} aria-label="Ouvrir la navigation"><Menu size={20} /></button>
     </div>
   );
 }
