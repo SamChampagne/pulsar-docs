@@ -148,8 +148,8 @@ function Home() {
           <img src={asset('/assets/pulsar-logo-source.jpg')} alt="Logo Pulsar" />
           <div className="signal-line"><span>LSOS</span><strong>Modular logistics operating system</strong></div>
           <div className="pulse-grid">
-            <b>6</b><span>modules métier</span>
-            <b>90+</b><span>endpoints</span>
+            <b>13</b><span>modules documentés</span>
+            <b>72</b><span>contrôleurs analysés</span>
             <b>24/7</b><span>agents gouvernés</span>
           </div>
         </div>
