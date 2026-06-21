@@ -119,9 +119,10 @@ h1 { font-size: clamp(42px, 4.7vw, 66px); line-height:.96; letter-spacing:-.055e
 .doc p, .doc li { color:var(--muted); }
 .doc li { margin:8px 0; }
 .steps { counter-reset: step; padding:0; display:grid; gap:12px; }
-.steps li { list-style:none; display:grid; grid-template-columns:42px 1fr; gap:14px; color:var(--muted); background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:16px; }
-.steps li:before { counter-increment: step; content: counter(step); width:34px; height:34px; border-radius:12px; background:var(--accent); color:white; display:grid; place-items:center; font-weight:900; }
-.steps strong { color:var(--text); display:block; }
+.steps li { list-style:none; display:grid; grid-template-columns:42px minmax(0, 1fr); grid-template-areas:"num title" "num text"; gap:6px 14px; color:var(--muted); background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:16px; }
+.steps li:before { grid-area:num; counter-increment: step; content: counter(step); width:34px; height:34px; border-radius:12px; background:var(--accent); color:white; display:grid; place-items:center; font-weight:900; }
+.steps strong { grid-area:title; color:var(--text); display:block; }
+.steps span { grid-area:text; min-width:0; }
 .cards { display:grid; grid-template-columns: repeat(2, 1fr); gap:12px; margin:18px 0; }
 .cards button { text-align:left; border:1px solid var(--line); background:var(--panel); color:var(--text); padding:18px; border-radius:18px; display:grid; gap:8px; }
 .cards button:hover { border-color:var(--accent); }
@@ -198,7 +199,7 @@ td { color:var(--muted); }
   .lead { font-size:18px; }
   .doc h2 { margin:32px 0 10px; font-size:26px; }
   .doc h3 { font-size:20px; }
-  .steps li { grid-template-columns:34px 1fr; gap:10px; padding:14px; border-radius:16px; }
+  .steps li { grid-template-columns:34px minmax(0, 1fr); gap:6px 10px; padding:14px; border-radius:16px; }
   .steps li:before { width:30px; height:30px; border-radius:10px; }
   .cards button, .callout, .doc-footer { border-radius:16px; padding:16px; }
   pre { max-width:100%; border-radius:16px; padding:14px; font-size:13px; line-height:1.5; -webkit-overflow-scrolling:touch; }
